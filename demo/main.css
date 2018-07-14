@@ -1,0 +1,7 @@
+.button > img {
+	position: absolute;
+}
+
+.hide {
+	opacity: 0;
+}
