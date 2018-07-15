@@ -37,6 +37,8 @@ export function simpleButton(button, cb) {
     e.preventDefault();
     button.addEventListener("touchend", touchend);
   });
+
+	return cb;
 }
 
 export function stackButton(hideFn, showFn, button, cb) {
@@ -68,4 +70,6 @@ export function stackButton(hideFn, showFn, button, cb) {
     e.preventDefault();
     button.addEventListener("touchend", touchend);
   });
+
+	return () => changeStack(cb());
 }
