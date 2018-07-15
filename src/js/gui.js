@@ -41,7 +41,7 @@ export function simpleButton(button, cb) {
 	return cb;
 }
 
-export function stackButton(hideFn, showFn, button, cb) {
+export function stackButton(hideFn, showFn, button, cb, opts) {
   const iconArr = button.getElementsByTagName("*");
 	
   function changeStack(state) {
@@ -57,12 +57,22 @@ export function stackButton(hideFn, showFn, button, cb) {
   changeStack(0);
 
   button.addEventListener("mouseup", function() {
-    changeStack(cb());
+		if (opts.prevent) {
+			cb();
+		}
+		else {
+			changeStack(cb());
+		}
   });
 
   function touchend(e) {
     e.preventDefault();
-    changeStack(cb());
+		if (opts.prevent) {
+			cb();
+		}
+		else {
+			changeStack(cb());
+		}
     button.removeEventListener("touchend", touchend);
   }
 
@@ -71,5 +81,5 @@ export function stackButton(hideFn, showFn, button, cb) {
     button.addEventListener("touchend", touchend);
   });
 
-	return () => changeStack(cb());
+	return (state) => changeStack(state);
 }
